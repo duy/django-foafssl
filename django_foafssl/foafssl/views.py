@@ -4,22 +4,19 @@ from  foafcert.foafcert import *
 from datetime import datetime
 #from pytz import timezone
 
-#def gen_cert(request,
-#    template_name="foafssl/gen_cert.html"):
+
+"""
+@TODO:
+ * Create form for custom name and webid
+ * Include in the form  the password and change foafcert to get it from variable/file
+ * Firefox should ask to import the cert instead of downloading
+"""
 def gen_cert(request):
     
     name = "henrystory"
     webid = "http://bblfish.net/people/henry/card#me"
-#    openssl_file_path = "data/openssl-foaf.cnf"
-#    openssl_custom_file_path = "/tmp/%s_openssl-foaf.cnf" % (name)
-#    openssl_cert_file_path = "/tmp/%s_cert.pem" % name
-#    openssl_private_key_file_path = "/tmp/%s_privatekey.pem" % name
-#    openssl_pkcs12_file_path = "/tmp/%s_cert.p12" % name
-#    create_openssl(name, webid, openssl_custom_file_path)
     create_openssl(name, webid)
-#    generate_cert_x509(openssl_custom_file_path, openssl_cert_file_path)
     generate_cert_x509(name)
-#    export_pkcs12(openssl_cert_file_path, openssl_private_key_file_path, openssl_pkcs12_file_path)
     openssl_pkcs12_file_path = export_pkcs12(name)
     length = os.path.getsize(openssl_pkcs12_file_path)
 #    now_utc = datetime.now(timezone('UTC'))
@@ -30,17 +27,7 @@ def gen_cert(request):
     fp = open(openssl_pkcs12_file_path)
     content = fp.read()
     fp.close()
-#    t = Template(response.content)
-#    response.content = t.render(RequestContext(request))
 
-#    r = render_to_response(template_name, {
-#        "join_request_form": join_request_form,
-#        "invites_received": invites_received,
-#        "invites_sent": invites_sent,
-#        "joins_sent": joins_sent,
-#    }, context_instance=RequestContext(request))
-
-#    r = HttpResponse(content,mimetype="application/x-x509-user-cert")
 #    r = HttpResponse(mimetype="application/x-x509-user-cert")
 #    r.headers['Content-Type'] = "application/x-x509-user-cert" 
 #    r.headers['Content-Length'] =.length
