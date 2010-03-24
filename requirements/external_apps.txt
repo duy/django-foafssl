@@ -1,6 +1,0 @@
---requirement=libs.txt
-#--find-links=http://pypi.pinaxproject.com
-#--find-links=http://pypi2.pinaxproject.com
---find-links=http://pypi.rhizomatik.net
-
-python-foafcert==0.1
