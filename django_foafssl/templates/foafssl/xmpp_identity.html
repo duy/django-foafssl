@@ -1,0 +1,19 @@
+{# <form action="/xmpp_identity/" method="post"> #}
+<form action="" method="post">
+{{ form.as_p }}
+<input type="submit" name="PKCS12"value="Download in PKCS#12 format" />
+<input type="submit" name="PEM"value="Download in PEM format" />
+</form>
+
+{% comment %}
+<form action="/contact/" method="post">
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }}: {{ field }}
+        </div>
+    {% endfor %}
+    <p><input type="submit" value="Send message" /></p>
+</form>
+{% endcomment %}
+

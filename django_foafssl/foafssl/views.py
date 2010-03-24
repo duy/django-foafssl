@@ -1,9 +1,14 @@
-from django.http import HttpResponse 
+from django.http import HttpResponse
+from django.shortcuts import render_to_response
 #from foafcert import create_openssl
-from  foafcert.foafcert import *
+from  foafcert.xmpp_foaf_cert import *
+from  foafcert.foaf_cert_openssl import *
+from foafssl.reg_sqlite import *
 from datetime import datetime
 #from pytz import timezone
-
+from foafssl.forms import *
+from settings import JABBER_SQLITE_PATH, JABBER_CACERT_PATH, JABBER_CAKEY_PATH
+from django.utils.translation import ugettext_lazy as _
 
 """
 @TODO:
@@ -28,22 +33,60 @@ def gen_cert(request):
     content = fp.read()
     fp.close()
 
-#    r = HttpResponse(mimetype="application/x-x509-user-cert")
 #    r.headers['Content-Type'] = "application/x-x509-user-cert" 
 #    r.headers['Content-Length'] =.length
 #    r.headers['Last-Modified'] = date
-#    r.headers['Accept-Ranges'] = 'bytes'
 
-    r = HttpResponse(mimetype="application/x-pkcs12")
-    r['Content-Disposition'] = 'attachment; filename=%s' % openssl_pkcs12_file_path
-    r['Content-Description'] = 'File Transfer'
-    r["Content-Transfer-Encoding"] = "binary"
+####    r = HttpResponse(mimetype="application/x-pkcs12")
+    r = HttpResponse(mimetype="application/x-x509-user-cert")
+#    r['Content-Disposition'] = 'attachment; filename=%s' % openssl_pkcs12_file_path
+
+    r['Content-Disposition'] = 'attachment; filename=%s' % "mycert.p12"
+#    r['Content-Description'] = 'File Transfer'
+#    r["Content-Transfer-Encoding"] = "binary"
     r["Content-Length"] = length
-    r["Pragma"] = "private"
-    r["Expires"] = "0"
-    r["Cache-Control"] = "must-revalidate, post-check=0, pre-check=0"
-    r["Cache-Control"] = "private"
+#    r["Pragma"] = "private"
+#    r["Expires"] = "0"
+#    r["Cache-Control"] = "must-revalidate, post-check=0, pre-check=0"
+#    r["Cache-Control"] = "private"
+    r["Accept-Ranges"] ="bytes"
 
     r.write(content)
     return r
+
+def xmpp_identity(request):
+    if request.method == 'POST': 
+        form = XmppIdentityForm(request.POST) 
+        if form.is_valid(): 
+            # Process the data in form.cleaned_data
+            id_xmpp = form.cleaned_data['id_xmpp']
+            xmpp_password = form.cleaned_data['xmpp_password']
+            username, domain = id_xmpp.split('@')
+            sqlite_path = JABBER_SQLITE_PATH
+            if not exists(username, domain, sqlite_path):
+                adduser(username, domain, xmpp_password, sqlite_path)
+            webid =  form.cleaned_data['webid']
+            mkcert_casigned_from_file_save(str(id_xmpp), str(webid), JABBER_CACERT_PATH, JABBER_CAKEY_PATH)
+            if 'PEM' in request.POST:
+                path = pemcert()
+            elif 'PKCS12' in request.POST:
+                path = pkcs12cert()
+
+            fp = open(path)
+            content = fp.read()
+            fp.close()
+            length = os.path.getsize(path)
+            r = HttpResponse(mimetype="application/x-x509-user-cert")
+            r['Content-Disposition'] = 'attachment; filename=%s' % "mycert"
+            r["Content-Length"] = length
+            r["Accept-Ranges"] ="bytes"
+            r.write(content)
+#            request.user.message_set.create(message=_("You have finished creating a client certificate with webid: '%(webid)s and xmpp id: %(id_xmpp)s'") % {'webid': webid, 'id_xmpp': id_xmpp})
+            return r
+    else:
+        form = XmppIdentityForm() # An unbound form
+
+    return render_to_response('foafssl/xmpp_identity.html', {
+        'form': form,
+    })
 
