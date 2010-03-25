@@ -8,7 +8,6 @@ urlpatterns = patterns('',
     # Example:
 #    (r'^django_foafssl/', include('django_foafssl.foafssl.urls')),
     (r'^$', include('foafssl.urls')),
-    (r'^xmpp_psn/', include('xmpp_psn.urls'))
 #    url(r'^$', homepage, name="home"),
 #    url(r'^$', direct_to_template, {
 #        "template": "homepage.html",

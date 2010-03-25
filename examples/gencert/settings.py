@@ -89,7 +89,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'foafssl',
-    'xmpp_psn',
 )
 
 # settings for jabberd

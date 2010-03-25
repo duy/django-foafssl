@@ -7,7 +7,7 @@ from  foafcert.foaf_cert_openssl import *
 from datetime import datetime
 #from pytz import timezone
 from foafssl.forms import *
-from settings import JABBER_SQLITE_PATH, JABBER_CACERT_PATH, JABBER_CAKEY_PATH, JABBER_DOMAIN
+from settings import JABBER_CACERT_PATH, JABBER_CAKEY_PATH, JABBER_DOMAIN
 from django.utils.translation import ugettext_lazy as _
 from jabberutils import JabberUtil
 """
