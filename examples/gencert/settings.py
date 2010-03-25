@@ -89,9 +89,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'foafssl',
+    'xmpp_psn',
 )
 
 # settings for jabberd
+JABBER_DOMAIN = 'xmpp.rhizomatik.net'
 JABBER_SQLITE_PATH = os.path.join(BASE_DIR,  'jabberd_data/sqlite.db')
 #JABBER_SQLITE_PATH = '/tmp/django-foafssl/examples/gencert/jabberd_data/sqlite.db'
 JABBER_CACERT_PATH = os.path.join(BASE_DIR, 'jabberd_data/xmpp_foaf_cacert.pem')

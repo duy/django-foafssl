@@ -1,5 +1,8 @@
 from pysqlite2 import dbapi2 as sqlite
 
+"""
+@TODO: close database or sqlite file will be 0 length
+"""
 def initdb(sqlite_path):
     cn = sqlite.connect(sqlite_path)
     return (cn, cn.cursor())
