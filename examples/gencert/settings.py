@@ -2,6 +2,10 @@
 
 import os
 import sys
+import django_foafssl
+
+FOAFSSL_ROOT = os.path.abspath(os.path.dirname(django_foafssl.__file__))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -12,12 +16,11 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Fix up foafssl imports here. We would normally place foafss in 
+# Fix up foafssl imports here. We would normally place foafssl in 
 # a directory accessible via the Django app, but this is an
 # example and we ship it a couple of directories up.
-sys.path.insert(0, os.path.join(BASE_DIR, '../../django_foafssl/'))
+#sys.path.insert(0, os.path.join(PROJECT_ROOT, '../../django_foafssl/'))
 
 DATABASE_ENGINE = ''           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = ''             # Or path to database file if using sqlite3.
@@ -79,8 +82,9 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, 'templates'),
-    os.path.join(BASE_DIR, '../../django_foafssl/templates'),
+    os.path.join(PROJECT_ROOT, 'templates'),
+#    os.path.join(PROJECT_ROOT, '../../django_foafssl/templates'),
+    os.path.join(FOAFSSL_ROOT, "templates"),
 )
 
 INSTALLED_APPS = (
@@ -93,7 +97,5 @@ INSTALLED_APPS = (
 
 # settings for jabberd
 JABBER_DOMAIN = 'xmpp.rhizomatik.net'
-JABBER_SQLITE_PATH = os.path.join(BASE_DIR,  'jabberd_data/sqlite.db')
-#JABBER_SQLITE_PATH = '/tmp/django-foafssl/examples/gencert/jabberd_data/sqlite.db'
-JABBER_CACERT_PATH = os.path.join(BASE_DIR, 'jabberd_data/xmpp_foaf_cacert.pem')
-JABBER_CAKEY_PATH = os.path.join(BASE_DIR, 'jabberd_data/xmpp_foaf_cakey.key')
+JABBER_CACERT_PATH = os.path.join(PROJECT_ROOT, 'jabberd_data/xmpp_foaf_cacert.pem')
+JABBER_CAKEY_PATH = os.path.join(PROJECT_ROOT, 'jabberd_data/xmpp_foaf_cakey.key')

@@ -8,3 +8,4 @@ M2Crypto==0.20.2
 pyOpenSSL==0.10
 pysqlite==2.6.0
 xmpppy==1.0.1
+django-foafssl==0.1
