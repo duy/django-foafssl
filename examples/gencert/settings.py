@@ -2,9 +2,9 @@
 
 import os
 import sys
-import django_foafssl
+import foafssl
 
-FOAFSSL_ROOT = os.path.abspath(os.path.dirname(django_foafssl.__file__))
+FOAFSSL_ROOT = os.path.abspath(os.path.dirname(foafssl.__file__))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
