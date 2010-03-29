@@ -10,11 +10,11 @@ import pyxmpp.jabber.all
 import pyxmpp.jabber.vcard
 from pyxmpp.jabber.clientstream import LegacyAuthenticationError, RegistrationError
 
-RESOURCE = "FOAF+SSL_util"
+RESOURCE = "django-foafssl"
 
 VCARD_DATA = """BEGIN:vCard
 VERSION:3.0
-N:FOAF+SSL user
+N:%(username)s
 END:vCard"""
 
 class JabberUtil(pyxmpp.jabber.client.JabberClient):
@@ -24,7 +24,7 @@ class JabberUtil(pyxmpp.jabber.client.JabberClient):
         self.timeout = 2
         self.resource = RESOURCE
         # Set default vCard content
-        self.vCard_data = VCARD_DATA
+        self.vCard_data = VCARD_DATA  % {"username": username}
         # Set the nickname
         if nickname:
             self.nickname = nickname
@@ -33,6 +33,7 @@ class JabberUtil(pyxmpp.jabber.client.JabberClient):
         # initialize a jabber client
         jid = pyxmpp.jid.JID(username, server, self.resource)
         pyxmpp.jabber.client.JabberClient.__init__(self, jid, password)
+        print "Initialized client with jid %s" % jid
 
     def loop_until_handled(self, timeout=None):
         if not timeout:

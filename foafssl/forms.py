@@ -1,7 +1,7 @@
 from django import forms
 from settings import JABBER_DOMAIN
 """
-@TODO: Fix max_lenght
+@TODO: Fix max_length
 """
 class XmppIdentityForm(forms.Form):
 #    id_xmpp = forms.CharField(max_length=255)

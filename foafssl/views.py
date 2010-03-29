@@ -6,10 +6,11 @@ from  foafcert.xmpp_foaf_cert import *
 from datetime import datetime
 #from pytz import timezone
 from forms import *
-from settings import JABBER_CACERT_PATH, JABBER_CAKEY_PATH, JABBER_DOMAIN
+from settings import JABBER_CACERT_PATH, JABBER_CAKEY_PATH, JABBER_DOMAIN, CERT_SERIAL_PATH
 from django.utils.translation import ugettext_lazy as _
-from jabbe_registration import JabberUtil
-
+from jabber_registration import JabberUtil
+from socket import error as SocketError
+from pyxmpp.jabber.clientstream import RegistrationError
 """
 @TODO:
  * Create form for custom name and webid
@@ -34,11 +35,23 @@ def xmpp_identity(request):
             try:
                 c = JabberUtil(username, domain, password)
                 c.register()
-            except:
-                print "usuer already exists" #  (or other error)
+            # c.connect(register=True) -> Network is unreachable
+            except SocketError, msg: 
+                print msg[1]
+                # Pass the error to template
+            # RegistrationError: Authentication error condition: conflict
+            except RegistrationError, msg:
+                print msg
+                print "That user already exists"
+                # Pass the error to template
+            except e:
+                print "Unknown error""
+                print e
             
-            webid =  form.cleaned_data['webid']
-            mkcert_casigned_from_file_save(str(id_xmpp), str(webid), JABBER_CACERT_PATH, JABBER_CAKEY_PATH)
+            webid = str(form.cleaned_data['webid'])
+#            mkcert_casigned_from_file_save(str(id_xmpp), str(webid), JABBER_CACERT_PATH, JABBER_CAKEY_PATH)
+            id_xmpp = str(username)+'@'+domain
+            mkcert_casigned_from_file_save(id_xmpp, webid, JABBER_CACERT_PATH, JABBER_CAKEY_PATH, CERT_SERIAL_PATH)
             if 'PEM' in request.POST:
                 path = pemcert()
             elif 'PKCS12' in request.POST:
