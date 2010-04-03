@@ -1,0 +1,30 @@
+
+{% load i18n %}
+
+    <p>
+        {% blocktrans %}
+        <b>django-foafssl</b> is a  project intended to provide 
+        <a href="">
+        FOAF+SSL authentication and authorization </a>
+        through HTTP (using 
+        <a href="http://djangoproject.com/">Django</a>) and XMPP.
+       
+        {% endblocktrans %}
+    </p>
+    <p>
+        {% blocktrans %}
+        Currently it is only composed by a module thats create jabber account 
+        in a client certificate enabled jabber server and a generate a client 
+        certificate valid to authenticate against that server.
+        {% endblocktrans %}
+    </p>
+
+    <p>
+        {% blocktrans %}
+        For more information about django-foafssl and FOAF+SSL enabled jabber 
+        server and client (installation, todo, etc.), see:
+        <a href="http://rhizomatik.net/mycelia/wiki/FOAFSSLXMPP">FOAF+SSL+XMPP</a>.
+        {% endblocktrans %}
+    </p>
+
+

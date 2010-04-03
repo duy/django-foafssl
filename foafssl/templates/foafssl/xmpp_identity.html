@@ -1,19 +1,76 @@
-{# <form action="/xmpp_identity/" method="post"> #}
-<form action="" method="post">
-{{ form.as_p }}
-<input type="submit" name="PKCS12"value="Download in PKCS#12 format" />
-<input type="submit" name="PEM"value="Download in PEM format" />
-</form>
+{% extends "foafssl/base.html" %}
 
-{% comment %}
-<form action="/contact/" method="post">
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }}: {{ field }}
-        </div>
-    {% endfor %}
-    <p><input type="submit" value="Send message" /></p>
-</form>
-{% endcomment %}
+{% load i18n %}
+
+{% load uni_form %}
+
+{% block head_title %}{% blocktrans %}XMPP and HTTP FOAF+SSL Client Certificate{% endblocktrans %}{% endblock %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block body %}
+
+{% if messages %}
+    <ul id="messages">
+        {% for message in messages %}
+        <li id="message_{{ forloop.counter }}">{{message}}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="left_panel">
+
+    <h1>{% trans "XMPP and HTTP FOAF+SSL Client Certificate" %}</h1>
+
+    {% include "foafssl/intro.html" %}
+
+    {# if uni_form #}
+
+    <div class="form-toggle">
+        {#<p><span id="edit-profile-toggle"><img src="{{ MEDIA_URL }}pinax/images/silk/icons/pencil.png" border="0" title="{% trans "Edit Profile" %}" />{% trans "Edit profile" %}</span></p>#}
+
+        {#<form class="uniForm" id="edit-profile" method="POST" action="" style="display: none;">#}
+        <form class="uniForm" method="POST" action="">
+            <fieldset class="inlineLabels">
+                {{ form|as_uni_form }}
+                <div class="form_block">
+                    <input type="hidden" name="action" value="Download in PKCS#12 format" />
+                    <input type="submit" value="{% trans "Download in PKCS#12 format" %}" name="PKCS12""/>
+                    {#<input type="submit" name="PEM"value="Download in PEM format" />#}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    {# if not uni_form #}
+
+    {% comment %}
+    <form action="" method="post">
+        {{ form.as_p }}
+        <input type="submit" name="PKCS12"value="Download in PKCS#12 format" />
+        {#<input type="submit" name="PEM"value="Download in PEM format" />#}
+    </form>
+    {% endcomment %}
+
+
+
+    {% comment %} 
+    <form action="/contact/" method="post">
+        {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }}: {{ field }}
+            </div>
+        {% endfor %}
+        <p><input type="submit" value="Send message" /></p>
+    </form>
+    {% endcomment %}
+
+</div>
+
+{% endblock %}
+
+{% block extra_body %}
+{% endblock %}
 

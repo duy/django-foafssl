@@ -20,3 +20,9 @@ urlpatterns = patterns('',
     # (r'^admin/', include(admin.site.urls)),
 )
 
+
+from django.conf import settings
+if settings.SERVE_MEDIA:
+    urlpatterns += patterns('',
+        (r'^site_media/', include('staticfiles.urls')),
+    )
