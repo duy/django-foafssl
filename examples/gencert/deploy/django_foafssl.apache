@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+        ServerName foafssl.rhizomatik.net
+        WSGIDaemonProcess django_foafssl-production user=django_foafssl group=django_foafssl threads=10 python-path=/srv/django/foafssl.rhizomatik.net/django_foafssl-env/lib/python2.5/site-packages
+        WSGIProcessGroup django_foafssl-production
+        WSGIScriptAlias / /srv/django/foafssl.rhizomatik.net/releases/current/examples/gencert/deploy/django_foafssl.wsgi
+        <Directory /srv/django/foafssl.rhizomatik.net/releases/current/examples/gencert/deploy>
+            Order deny,allow
+            Allow from all
+        </Directory>
+        ErrorLog /srv/django/foafssl.rhizomatik.net/var/log/error.log
+        LogLevel warn
+        CustomLog /srv/django/foafssl.rhizomatik.net/var/log/access.log combined
+</VirtualHost>

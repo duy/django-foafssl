@@ -1,6 +1,7 @@
-pyc
+*.pyc
 *~
 *.old
 build
 dist
 *.egg-info
+*pip-log.txt

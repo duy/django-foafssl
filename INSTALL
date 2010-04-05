@@ -1,0 +1,52 @@
+Download the application
+
+From git:
+{{{
+git clone git://git.rhizomatik.net/django-foafssl
+}}}
+From release tarball:
+{{{
+wget http://pypi.rhizomatik.net/django-foafssl-0.1.tar.gz)
+tar -xvzf django-foafssl-0.1.tar.gz
+cd django-foafssl-0.1
+}}}
+
+Create a virtualenv
+
+{{{
+virtualenv --no-site-packages foafsslenv
+}}}
+
+Install dependencies
+
+{{{
+source foafsslenv/bin/activate
+pip install -E foafsslenv -r examples/gencert/requirements/external_apps.txt
+}}}
+
+Modify settings (settings_local.py) according to your installation:
+{{{
+JABBER_DOMAIN = 'yourxmppdomain.com'
+JABBER_CACERT_PATH = os.path.join(PROJECT_ROOT, 'ca-cert.pem')
+JABBER_CAKEY_PATH = os.path.join(PROJECT_ROOT, 'ca-key.pem')
+CERT_SERIAL_PATH = os.path.join(PROJECT_ROOT, 'xmpp_foaf_cert_serial.txt')
+}}}
+
+Execute de developemnt server:
+
+{{{
+cd examples/gencert
+python manage.py runserver
+}}}
+
+Or configure your apache :
+
+{{{
+cp examples/gencert/deploy/django-foafssl.apache /etc/apache2/sites-available/yourdjangofoafssldomain.com
+vim /etc/apache2/sites-available/yourdjangofoafssldomain.com
+}}}
+
+{{{
+sudo a2ensite /etc/apache2/sites-available/yourdjangofoafssldomain.com
+sudo /etc/init.d/apache2 reload
+}}}

@@ -27,11 +27,15 @@ setup(
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: GPL License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: JavaScript',
         'Framework :: Django',
+        "Topic :: Internet :: WWW/HTTP",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ],
+    keywords='foaf, ssl, foaf+ssl, certificate, client certificate, authentication, authorization,django',
     include_package_data=True,
     zip_safe=False,
     # Ignore the tarballs we built our own in a source distribution
@@ -39,5 +43,9 @@ setup(
         'requirements': ['%s/*.tar.gz' % VERSION],
     },
     # include templates and docs
+#    setup_requires=[
+#        'setuptools_dummy',
+#    ],
+
 )
 

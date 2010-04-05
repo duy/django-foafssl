@@ -120,9 +120,5 @@ INSTALLED_APPS = (
     'uni_form'
 )
 
-# settings for jabberd
-JABBER_DOMAIN = 'xmpp.rhizomatik.net'
-#JABBER_DOMAIN = 'calamar.net'
-JABBER_CACERT_PATH = os.path.join(PROJECT_ROOT, 'jabberd_data/xmpp_foaf_cacert.pem')
-JABBER_CAKEY_PATH = os.path.join(PROJECT_ROOT, 'jabberd_data/xmpp_foaf_cakey.key')
-CERT_SERIAL_PATH = os.path.join(PROJECT_ROOT, 'jabberd_data/xmpp_foaf_cert_serial.txt')
+from settings_local import *
+
