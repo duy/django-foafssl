@@ -1,1 +1,9 @@
+Introduction
+============
+
 Django apps for client certificates generation, authentication and WebId provider based on FOAF+SSL mechanism
+
+Features
+--------
+
+

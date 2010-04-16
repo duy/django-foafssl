@@ -17,11 +17,12 @@ def read(*path):
 setup(
     name='django-foafssl',
     version=VERSION,
-    description='FOAF+SSL tools for Django',
+    description='Django apps for client certificates generation, authentication and WebId provider based on FOAF+SSL mechanism',
     long_description=read('docs', 'intro.txt'),
     author='Duy',
     author_email='duy@rhizomtik.net',
-    url='http://git.rhizomatik.net/django-foafssl',
+    download-url='git://git.rhizomatik.net/django-foafssl',
+    url='http://rhizomatik.net/myceliafoafssl',
     packages=find_packages(),
     classifiers=[
         'Development Status :: 3 - Alpha',
