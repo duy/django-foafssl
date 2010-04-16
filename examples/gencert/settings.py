@@ -4,10 +4,16 @@
 import os.path
 import sys
 import foafssl
+import foafidentity
 import posixpath
 
 FOAFSSL_ROOT = os.path.abspath(os.path.dirname(foafssl.__file__))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+FOAFIDENTITY_ROOT = os.path.abspath(os.path.dirname(foafidentity.__file__))
+
+
+sys.path.insert(0, os.path.join(PROJECT_ROOT, '../'))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, '../../'))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -26,8 +32,8 @@ MANAGERS = ADMINS
 # example and we ship it a couple of directories up.
 #sys.path.insert(0, os.path.join(PROJECT_ROOT, '../../django_foafssl/'))
 
-DATABASE_ENGINE = ''           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = ''             # Or path to database file if using sqlite3.
+DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_NAME = 'dev.db'             # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
@@ -50,20 +56,17 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-#MEDIA_ROOT = ''
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
+#MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-#MEDIA_URL = ''
 MEDIA_URL = '/site_media/media/'
+#MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
 #STATIC_ROOT = os.path.join(PROJECT_ROOT, 'media')
 STATIC_URL = '/site_media/static/'
+#STATIC_URL = '/media/'
+
 STATICFILES_DIRS = (
     ('gencert', os.path.join(PROJECT_ROOT, 'media')),
     ('foafssl', os.path.join(FOAFSSL_ROOT, 'media')),
@@ -101,6 +104,7 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates'),
 #    os.path.join(PROJECT_ROOT, '../../django_foafssl/templates'),
     os.path.join(FOAFSSL_ROOT, "templates"),
+    os.path.join(FOAFSSL_ROOT, "templates"),
 )
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
@@ -117,7 +121,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'foafssl',
-    'uni_form'
+    'uni_form',
+    'foafidentity',
 )
 
 from settings_local import *

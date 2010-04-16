@@ -1,0 +1,33 @@
+{% extends "base_rdfa.html" %}
+
+{% load i18n %}
+
+{% block extra_head_base %}
+    <!--<link rel="stylesheet" href="{{ STATIC_URL }}bookmarks/css/bookmarks.css" />-->
+    {% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block login %}
+{% endblock %}
+
+{% block logo_link_image %}{% endblock %}
+
+{% block right_tabs %}
+        <ul class="tabs">{% spaceless %}
+            <li id="tab_identity"></li>
+        {% endspaceless %}</ul>
+{% endblock %}
+
+{% block extra_body_base %}
+    {% block extra_body %}{% endblock %}
+{% endblock %}
+
+{% block footer %}
+ <p about="" resource="http://www.w3.org/TR/rdfa-syntax"
+                rel="dct:conformsTo" xmlns:dc="http://purl.org/dc/terms/">
+
+                <a href="http://validator.w3.org/check?uri=referer"><img
+                    src="http://www.w3.org/Icons/valid-xhtml-rdfa-blue"
+                    alt="Valid XHTML + RDFa"   /></a>
+            </p>
+{% endblock %}

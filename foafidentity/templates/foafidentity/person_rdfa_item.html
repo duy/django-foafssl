@@ -1,0 +1,30 @@
+{% load i18n %}
+
+
+<!-- personal profile document -->
+<div style="display:none" typeof="foaf:PersonalProfileDocument" about="">
+    <span rel="foaf:maker" href="#me"></span></p>
+    <span rel="foaf:primaryTopic" href="#me"></span></p>
+</div>
+
+<!-- start tabs container -->
+<div id="container" typeof="foaf:Person" about="me">
+
+    <!-- start me tab -->
+    <div id="me">
+        {% if person.nickname %}<p><label for="id_nickname">{% trans "Nickame" %}</label>: <span id="id_nickname" property="foaf:nick" name="nickname" >{{person.nickname}}</span></p>{% endif %}
+        {% if person.mbox %}<p><label for="id_mbox">{% trans "Mbox" %}</label>: <span id="id_mbox" property="foaf:mbox" name="mbox" >{{person.mbox}}</span></p>{% endif %}
+        <span typeof="foaf:OnlineAccount">
+        {% if person.seeAlso %}<p><label for="id_seeAlso">{% trans "SeeAlso" %}</label>: <span id="id_seeAlso" property="rdfs:seeAlso" name="seeAlso" >{{person.seeAlso}}</span></p>{% endif %}
+                {% if person.openid %}<p><label for="id_openid">{% trans "OpenId" %}</label>: <span id="id_openid" property="foaf:openid" name="openid" >{{person.openid}}</span></p>{% endif %}
+                {% if person.jabberID %}<p><label for="id_jabberID">{% trans "JabberID" %}</label>: <span id="id_jabberID" property="foaf:holdsAccount" name="jabberID" >{{person.jabberID}}</span></p>{% endif %}
+        </span></p>
+        {% if person.weblog %}<p><label for="id_weblog">{% trans "Weblog" %}</label>: <span id="id_weblog" property="foaf:weblog" name="nick" />{{person.weblog}}</span></p>{% endif %}
+        {% if person.homepage %}<p><label for="id_homepage">{% trans "Homepage" %}</label>: <span id="id_homepage" property="foaf:homepage" name="homepage" >{{person.homepage}}</span></p>{% endif %}
+        
+        <span typeof="cert:identity">
+                {% if person.modulus %}<p><label for="id_modulus">{% trans "Public Key" %}</label>: <span id="publicKey" property="rsa:modulus" name="publicKey"  class="cert:hex">{{person.modulus}}</span></p>{% endif %}
+                {% if person.public_exponent %}<p><label for="id_public_exponent">{% trans "Exponent" %}</label>: <span id="exponent" property="rsa:public_exponent" name="exponent" class="cert:dec" ></span>{{person.public_exponent}}</p>{% endif %}
+        </span>
+    </div>
+</div>

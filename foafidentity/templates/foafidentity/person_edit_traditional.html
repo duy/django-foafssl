@@ -1,0 +1,17 @@
+
+{% load i18n %}
+
+<form class="uniForm" method="POST" action="{% url person_edit %}">
+    <fieldset>
+        {% for field in person_form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }}: {{ field }}
+            </div>
+        {% endfor %}
+        {#{{ person_form.as_p }}#}
+        <div class="form_block">
+            <input type="submit" value="Submit" />
+        </div>
+    </fieldset>
+</form>

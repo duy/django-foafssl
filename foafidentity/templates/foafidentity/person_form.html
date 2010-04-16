@@ -1,0 +1,63 @@
+{% load i18n %}
+
+    <div class="form-toggle">
+        {#<p><span id="edit-profile-toggle"><img src="{{ MEDIA_URL }}pinax/images/silk/icons/pencil.png" border="0" title="{% trans "Edit Profile" %}" />{% trans "Edit profile" %}</span></p>#}
+
+        {#<form class="uniForm" id="edit-profile" method="POST" action="" style="displaynone;">#}
+    <form class="uniForm" method="POST" action="{% url person_edit_rdfa %}">
+        <fieldset class="inlineLabels">
+            <!-- personal profile document -->
+            <div style="display:none" typeof="foaf:PersonalProfileDocument" about="">
+                <span rel="foaf:maker" href="#me"></span>
+                <span rel="foaf:primaryTopic" href="#me"></span>
+            </div>
+
+            <!-- start tabs container -->
+            <div id="container" typeof="foaf:Person" about="me">
+
+                <!-- start me tab -->
+                <div id="me">
+                    <div class="fieldWrapper">
+                        <label for="id_name">{{person_form.name.label}}</label><input id="id_name" property="foaf:name" type="text" name="name" value="" />
+                    </div>
+                    <div class="fieldWrapper">
+                        <label for="id_mbox">{{person_form.mbox.label}}</label><input id="id_mbox" property="foaf:mbox" type="text" name="mbox" value="" />
+                    </div>
+                    <span typeof="foaf:OnlineAccount">
+                        <div class="fieldWrapper">
+                            <label for="id_openid">{{person_form.openid.label}}</label><input id="id_openid" property="foaf:openid" type="text" name="openid" value="" />
+                        </div>
+                        <div class="fieldWrapper">
+                            <label for="id_jabberID">{{person_form.jabberID.label}}</label><input id="id_jabberID" property="foaf:holdsAccount" type="text" name="jabberID value="" />
+                        </div>
+                    </span>
+                    <div class="fieldWrapper">
+                        <label for="id_weblog">{{person_form.weblog.label}}</label><input id="id_weblog" property="foaf:weblog" type="text" name="nick" value="" />
+                    </div>
+                    <div class="fieldWrapper">
+                        <label for="id_seeAlso">{{person_form.seeAlso.label}}</label><input id="id_seeAlso" property="rdfs:seeAlso" type="text" name="seeAlso" value="" />
+                    </div>
+                    <div class="fieldWrapper">
+                        <label for="id_nickname">{{person_form.nickname.label}}</label><input id="id_nickname" property="foaf:nick" type="text" name="nickname" value="" />
+                    </div>
+                    <div class="fieldWrapper">
+                        <label for="id_homepage">{{person_form.name.label}}</label><input id="id_homepage" property="foaf:homepage" type="text" name="homepage" value="" />
+                    </div>
+                    
+                    <span typeof="cert:identity">
+                        <div class="fieldWrapper">
+                            <label for="id_name">{% trans "Public Key" %}</label><input id="publicKey" property="rsa:modulus" type="text" name="publicKey"  class="cert:hex"/>
+                        </div>
+                        <div class="fieldWrapper">
+                            <label for="id_name">{% trans "Exponent" %}</label><input id="exponent" property="rsa:public_exponent" type="text" name="exponent" class="cert:dec"/>
+                        </div>
+                    </span>
+                </div>
+
+            </div>
+            <div class="form_block">
+                <input type="hidden" name="action" value="foaf" />
+                <input type="submit" value="{% trans "Submit" %}" />
+            </div>
+        </fieldset>
+    </form>

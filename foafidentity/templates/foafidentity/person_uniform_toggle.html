@@ -1,0 +1,17 @@
+
+{% load i18n %}
+
+{% load uni_form %}
+
+<div class="form-toggle">
+    <p><span id="edit-person-toggle"><img src="{{STATIC_URL}}/images/foaf_keylock_16.png" />{% trans "Get my WebId" %}</span></p>
+    <form class="uniForm" id="edit-person" method="POST" action="" style="display: none;">
+        <fieldset class="inlineLabels">
+            {{ person_form|as_uni_form }}
+            <div class="form_block">
+                <input type="hidden" name="action" value="foaf" />
+                <input type="submit" value="Submit" />
+            </div>
+        </fieldset>
+    </form>
+</div>

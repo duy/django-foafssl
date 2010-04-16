@@ -1,0 +1,11 @@
+--find-links=file://./0.1
+
+Django==1.1.1
+M2Crypto==0.20.2
+pyOpenSSL==0.10
+pyxmpp==1.0.1
+django-foafssl==0.1
+python-foafcert==0.1
+django-uni-form==0.6.0
+django-staticfiles==0.1.2
+

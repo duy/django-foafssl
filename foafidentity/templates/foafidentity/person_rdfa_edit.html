@@ -1,0 +1,27 @@
+{% extends "foafidentity/base.html" %}
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Edit FOAF{% endblocktrans %}{% endblock %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block body %}
+
+{% if messages %}
+    <ul id="messages">
+        {% for message in messages %}
+        <li id="message_{{ forloop.counter }}">{{message}}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="left_panel">
+
+<h1>{% trans "Edit FOAF" %}</h1>
+
+    {% include "foafidentity/person_form.html" %}
+
+</div>
+
+{% endblock %}

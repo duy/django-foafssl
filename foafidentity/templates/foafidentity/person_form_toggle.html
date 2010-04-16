@@ -1,0 +1,65 @@
+{% load i18n %}
+
+    <div class="form-toggle">
+        <p><span id="edit-person-toggle">{% trans "Edit FOAF" %}</span></p>
+
+        <form class="uniForm" id="edit-person" method="POST" action="" style="displaynone;">
+    {#<form class="uniForm" method="POST" action="{% url person_edit_rdfa %}">#}
+        <fieldset class="inlineLabels">
+                {% comment %}
+                {{ field.errors }}
+                {{ field.label_tag }}: {{ field }}
+                {% endcomment %}
+                
+            <!-- personal profile document -->
+            <div style="display:none" typeof="foaf:PersonalProfileDocument" about="">
+                <span rel="foaf:maker" href="#me"></span>
+                <span rel="foaf:primaryTopic" href="#me"></span>
+            </div>
+
+            <!-- start tabs container -->
+            <div id="container" typeof="foaf:Person" about="me">
+
+                <!-- start me tab -->
+                <div id="me">
+                    <div class="fieldWrapper">
+                        {{person_form.nickname.errors}}
+                        <label for="id_nickname">{{person_form.nickname.label}}</label>{{person_form.nickname}}
+                        <input id="id_nickname" property="foaf:nick" type="text" name="nickname" value="{{person_form.nickname.value}}" />
+                    </div>
+                    <div class="fieldWrapper">
+                        {{person_form.seeAlso.errors}}
+                        <label for="id_seeAlso">{{person_form.seeAlso.label}}</label><input id="id_seeAlso" property="rdfs:seeAlso" type="text" name="seeAlso" value="{{person_form.seeAlso.value}}" />
+                    </div>
+                    <div class="fieldWrapper">
+                        {{person_form.mbox.errors}}
+                        <label for="id_mbox">{{person_form.mbox.label}}</label><input id="id_mbox" property="foaf:mbox" type="text" name="mbox" value="{{person_form.mbox.value}}" />
+                    </div>
+                    <span typeof="foaf:OnlineAccount">
+                        <div class="fieldWrapper">
+                            {{person_form.openid.errors}}
+                            <label for="id_openid">{{person_form.openid.label}}</label><input id="id_openid" property="foaf:openid" type="text" name="openid" value="{{person_form.openid.value}}" />
+                        </div>
+                        <div class="fieldWrapper">
+                            {{person_form.jabberID.errors}}
+                            <label for="id_jabberID">{{person_form.jabberID.label}}</label><input id="id_jabberID" property="foaf:holdsAccount" type="text" name="jabberID" value="{{person_form.jabberID.value}}" />
+                        </div>
+                    </span>
+                    <div class="fieldWrapper">
+                        {{person_form.weblog.errors}}
+                        <label for="id_weblog">{{person_form.weblog.label}}</label><input id="id_weblog" property="foaf:weblog" type="text" name="nick" value="{{person_form.weblog.value}}" />
+                    </div>
+                    <div class="fieldWrapper">
+                        {{person_form.homepage.errors}}
+                        <label for="id_homepage">{{person_form.homepage.label}}</label><input id="id_homepage" property="foaf:homepage" type="text" name="homepage" value="{{person_form.homepage.value}}" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="form_block">
+                <input type="hidden" name="action" value="foaf" />
+                <input type="submit" value="{% trans "Save" %}" />
+            </div>
+        </fieldset>
+    </form>
+    </div>
