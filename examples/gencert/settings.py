@@ -24,7 +24,7 @@ MANAGERS = ADMINS
 # Fix up foafssl imports here. We would normally place foafssl in 
 # a directory accessible via the Django app, but this is an
 # example and we ship it a couple of directories up.
-#sys.path.insert(0, os.path.join(PROJECT_ROOT, '../../django_foafssl/'))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, '../../django_foafssl/'))
 
 DATABASE_ENGINE = ''           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = ''             # Or path to database file if using sqlite3.

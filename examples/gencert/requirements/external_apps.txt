@@ -8,8 +8,9 @@ pyOpenSSL==0.10
 pyxmpp==1.0.1
 libxml2-python==2.6.11
 dnspython==1.8.0
-django-foafssl==0.1
-python-foafcert==0.1
+#django-foafssl==0.1
+#python-foafcert==0.1
 django-uni-form==0.6.0
 django-staticfiles==0.1.2
-
+-e git+https://github.com/duy/python-foafcert.git#egg=python-foafcert
+#-e git+https://github.com/duy/django-foafssl.git#egg=django-foafssl

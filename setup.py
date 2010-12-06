@@ -21,7 +21,7 @@ setup(
     long_description=read('docs', 'intro.txt'),
     author='Duy',
     author_email='duy@rhizomtik.net',
-    download-url='git://git.rhizomatik.net/django-foafssl',
+    download_url='git://git.rhizomatik.net/django-foafssl',
     url='http://rhizomatik.net/myceliafoafssl',
     packages=find_packages(),
     classifiers=[
